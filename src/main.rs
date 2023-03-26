@@ -16,7 +16,18 @@ const SERVER: Color = Color::Yellow;
 const ERROR: Color = Color::Red;
 const CHAT: Color = Color::White;
 
+use clap::Parser;
+
+#[derive(Parser)]
+struct Cli {
+    /// The ip address of the server you want to connect to
+    #[arg(long = "ip_address")]
+    ip: Option<String>,
+}
+
 fn main() -> Result<(), ReadError> {
+    let ip_address = Cli::parse().ip.map(|addr| addr + ":6379").unwrap_or_else(|| "127.0.0.1:6379".to_string());
+
     let mut buf = String::with_capacity(16);
     let mut name;
     while {
@@ -26,7 +37,7 @@ fn main() -> Result<(), ReadError> {
         name.is_empty() || !name.is_ascii()
     } {}
 
-    let stream = TcpStream::connect("127.0.0.1:6379")?;
+    let stream = TcpStream::connect(ip_address)?;
 
     let mut reader = FrameReader::new(stream.try_clone()?);
     let mut writer = BufWriter::new(stream);

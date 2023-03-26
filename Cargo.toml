@@ -11,3 +11,4 @@ ctrlc = "3.2.4"
 itoa = "1.0.5"
 cursor = { git = "https://github.com/QnnOkabayashi/rust-course-utils" }
 readbuf = { git = "https://github.com/QnnOkabayashi/rust-course-utils" }
+clap = { version = "4.1.13", features = ["derive"] }
