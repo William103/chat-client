@@ -4,4 +4,4 @@ This is the chat client for lab6 from the [CS17SR](https://qnnokabayashi.github.
 
 # Usage
 
-Simply run `cargo run` to start the client.
+Run `cargo run -- <IP>` to connect to the server with ip address `<IP>`.
